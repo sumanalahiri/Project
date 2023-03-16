@@ -1,4 +1,5 @@
 from tkinter import *
+import tkinter as tk
 
 class DragDropDemo(Tk):
 
@@ -55,9 +56,21 @@ class DragDropDemo(Tk):
         # set the dragging widget to None initially
         self.draggingWidget = None
 
+        self.imageLocations = {self.label1: (10, 10),
+                               self.label2: (10, 70),
+                               self.label3: (10, 130),
+                               self.label4: (10, 190)}
+
+
+
+        self.reset_button = tk.Button(self, text="Reset Images", command= self.resetImages)
+        self.reset_button.place(x=150, y=700)
+
+
     def onDragStart(self, event):
         # save the widget that was clicked on
         self.draggingWidget = event.widget
+
 
         # calculate the position of the widget relative to the mouse pointer
         self.offsetX = event.x
@@ -82,18 +95,46 @@ class DragDropDemo(Tk):
             new_label.pack()
 
             # check if the correct image was dragged
-            if self.draggingWidget == self.label2:
+            if self.draggingWidget == self.label2 or self.draggingWidget == self.label3:
+                self.correct_label = Label(self.frame2, text="Correct Image Placed!", fg="green", font=("Arial", 16))
+                self.correct_label.pack()
+                self.label2=Label(self.frame2, image=self.image2)
+                self.label3=Label(self.frame2, image=self.image3)
+
                 print("Correct!")
             else:
                 print("Incorrect.")
+                # move the image back to its original position
+
 
         # reset the dragging widget
         self.draggingWidget = None
+
+    '''remove the images that are not correct and move them back to frame 1'''
+    def resetImages(self):
+        for widget, location in self.imageLocations.items():
+            if widget not in [self.label1, self.label3, self.label4]:
+                continue
+            x, y = location
+            widget.place(x=x, y=y)
+
+        for widget in self.frame2.winfo_children():
+            if widget not in [self.correct_label,self.label2,self.label3]:
+                self.label2.pack()
+                self.label3.pack()
+                widget.destroy()
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
     demo = DragDropDemo()
     demo.mainloop()
+
 
 
 
