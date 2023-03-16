@@ -63,7 +63,7 @@ class DragDropDemo(Tk):
 
 
 
-        self.reset_button = tk.Button(self, text="Remove incorrect images", command= self.resetImages)
+        self.reset_button = tk.Button(self, text="Check and Remove incorrect images", command= self.resetImages)
         self.reset_button.place(x=150, y=700)
 
 
@@ -97,7 +97,6 @@ class DragDropDemo(Tk):
             # check if the correct image was dragged
             if self.draggingWidget == self.label2 or self.draggingWidget == self.label3:
                 self.correct_label = Label(self.frame2, text="Correct Image Placed!", fg="green", font=("Arial", 16))
-                self.correct_label.pack()
                 self.label2=Label(self.frame2, image=self.image2)
                 self.label3=Label(self.frame2, image=self.image3)
 
@@ -122,6 +121,7 @@ class DragDropDemo(Tk):
             if widget not in [self.correct_label,self.label2,self.label3]:
                 self.label2.pack()
                 self.label3.pack()
+                self.correct_label.pack()
                 widget.destroy()
 
 
