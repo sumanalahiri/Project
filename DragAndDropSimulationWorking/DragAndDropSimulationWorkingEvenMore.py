@@ -63,7 +63,7 @@ class DragDropDemo(Tk):
 
 
 
-        self.reset_button = tk.Button(self, text="Reset Images", command= self.resetImages)
+        self.reset_button = tk.Button(self, text="Remove incorrect images", command= self.resetImages)
         self.reset_button.place(x=150, y=700)
 
 
@@ -113,7 +113,7 @@ class DragDropDemo(Tk):
     '''remove the images that are not correct and move them back to frame 1'''
     def resetImages(self):
         for widget, location in self.imageLocations.items():
-            if widget not in [self.label1, self.label3, self.label4]:
+            if widget not in [self.label1, self.label4 ]:
                 continue
             x, y = location
             widget.place(x=x, y=y)
@@ -123,11 +123,6 @@ class DragDropDemo(Tk):
                 self.label2.pack()
                 self.label3.pack()
                 widget.destroy()
-
-
-
-
-
 
 
 
