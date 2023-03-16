@@ -83,9 +83,12 @@ class DragDropDemo(Tk):
 
             # check if the correct image was dragged
             if self.draggingWidget == self.label2:
+                self.correct_label = Label(self.frame2, text="Correct Image Placed!", fg="green", font=("Arial", 16))
+                self.correct_label.pack()
                 print("Correct!")
             else:
                 print("Incorrect.")
+                # move the image back to its original position
 
         # reset the dragging widget
         self.draggingWidget = None
