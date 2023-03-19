@@ -1,6 +1,8 @@
 from tkinter import *
 import tkinter as tk
 
+print("push")
+
 class DragDropDemo(Tk):
 
     def __init__(self):
